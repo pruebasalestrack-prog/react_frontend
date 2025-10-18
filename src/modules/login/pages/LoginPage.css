@@ -1,0 +1,125 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  /* Made center much brighter with electric green, darker edges */
+  background: radial-gradient(ellipse at center, #4a7c2f 0%, #3a6625 20%, #2d4a1f 40%, #1a2814 70%, #0d0d0d 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Increased brightness and size of center glow */
+.login-page::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1200px;
+  height: 1200px;
+  background: radial-gradient(
+    circle,
+    rgba(118, 255, 3, 0.35) 0%,
+    rgba(139, 195, 74, 0.2) 30%,
+    rgba(118, 255, 3, 0.1) 50%,
+    transparent 70%
+  );
+  animation: pulse-glow 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Enhanced secondary glow layer for more brightness */
+.login-page::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1400px;
+  height: 1400px;
+  background: radial-gradient(circle, rgba(139, 195, 74, 0.25) 0%, rgba(118, 255, 3, 0.15) 40%, transparent 60%);
+  animation: rotate-glow 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+@keyframes rotate-glow {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  max-width: 1400px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .login-container {
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-page {
+    padding: 1.5rem;
+  }
+
+  .login-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .login-page::before {
+    width: 600px;
+    height: 600px;
+  }
+
+  .login-page::after {
+    width: 700px;
+    height: 700px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-page {
+    padding: 1rem;
+  }
+
+  .login-container {
+    gap: 1.5rem;
+  }
+
+  .login-page::before {
+    width: 400px;
+    height: 400px;
+  }
+
+  .login-page::after {
+    width: 500px;
+    height: 500px;
+  }
+}
