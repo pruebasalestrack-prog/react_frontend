@@ -1,0 +1,30 @@
+/* Variables de tema global */
+:root {
+  --primary-green: #8bc34a;
+}
+
+/* Tema Verde */
+body[data-theme="green"] {
+  --bg-primary: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+  --bg-secondary: linear-gradient(180deg, #ffffff 0%, #f5fef0 50%, #e8f9dd 100%);
+  --bg-card: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  --text-tertiary: rgba(255, 255, 255, 0.7);
+  --border-color: rgba(139, 195, 74, 0.3);
+  --accent-color: #8bc34a;
+  --card-hover-shadow: 0 12px 40px rgba(139, 195, 74, 0.2);
+}
+
+/* Tema Blanco */
+body[data-theme="white"] {
+  --bg-primary: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  --bg-secondary: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+  --bg-card: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  --text-primary: #2d3748;
+  --text-secondary: #4a5568;
+  --text-tertiary: #718096;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --accent-color: #8bc34a;
+  --card-hover-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,126 @@
+/* Changed to single chart container and green theme */
+.sales-charts-container {
+  margin-top: 2rem;
+}
+
+.chart-card {
+  padding: 2rem;
+  background: linear-gradient(135deg, #f1f8e9 0%, #dcedc8 100%);
+  border: 2px solid rgba(139, 195, 74, 0.4);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.chart-card:hover {
+  box-shadow: 0 6px 20px rgba(139, 195, 74, 0.2);
+  transform: translateY(-2px);
+  border-color: #8bc34a;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.chart-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2e7d32;
+  margin-bottom: 0.5rem;
+}
+
+.chart-header p {
+  font-size: 0.9rem;
+  color: #558b2f;
+}
+
+/* Added toggle button styles */
+.chart-controls {
+  display: flex;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 0.25rem;
+  border-radius: 10px;
+  border: 2px solid rgba(139, 195, 74, 0.3);
+}
+
+.chart-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: #558b2f;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.chart-toggle:hover {
+  background: rgba(139, 195, 74, 0.2);
+}
+
+.chart-toggle.active {
+  background: #8bc34a;
+  color: white;
+  box-shadow: 0 2px 8px rgba(139, 195, 74, 0.3);
+}
+
+/* Updated tooltip for green theme */
+.custom-tooltip {
+  background: linear-gradient(135deg, #8dcc46 0%, #dcedc8 100%);
+  border: 2px solid rgba(139, 195, 74, 0.5);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.tooltip-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #2e7d32;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(139, 195, 74, 0.3);
+}
+
+.tooltip-item {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0.25rem 0;
+}
+
+@media (max-width: 768px) {
+  .chart-card {
+    padding: 1.5rem;
+  }
+
+  .chart-header {
+    flex-direction: column;
+  }
+
+  .chart-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .chart-header p {
+    font-size: 0.8rem;
+  }
+
+  .chart-controls {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .chart-toggle span {
+    display: none;
+  }
+}
