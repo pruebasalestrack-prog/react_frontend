@@ -1,0 +1,29 @@
+{
+  "database_name": "db_pure_clientes",
+  "description": "Base de datos de clientes Pure",
+  "stats": {
+    "total_users": 89,
+    "active_projects": 15,
+    "total_revenue": 280000,
+    "pending_tasks": 8
+  },
+  "recent_activities": [
+    {
+      "id": 1,
+      "type": "client",
+      "title": "Nuevo cliente registrado",
+      "description": "Empresa de retail se une a Pure",
+      "date": "2025-10-16",
+      "status": "active"
+    },
+    {
+      "id": 2,
+      "type": "service",
+      "title": "Servicio de mantenimiento completado",
+      "description": "Actualización de sistemas móviles",
+      "date": "2025-10-15",
+      "status": "completed"
+    }
+  ],
+  "modules": ["Gestión de Clientes", "Servicios Móviles", "Facturación", "Soporte al Cliente"]
+}

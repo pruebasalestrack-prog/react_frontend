@@ -1,0 +1,43 @@
+{
+  "database_name": "db_ilca_principal",
+  "description": "Base de datos principal de ILCA",
+  "stats": {
+    "total_users": 150,
+    "active_projects": 23,
+    "total_revenue": 450000,
+    "pending_tasks": 12
+  },
+  "recent_activities": [
+    {
+      "id": 1,
+      "type": "project",
+      "title": "Nuevo proyecto móvil iniciado",
+      "description": "Desarrollo de app para cliente corporativo",
+      "date": "2025-10-15",
+      "status": "active"
+    },
+    {
+      "id": 2,
+      "type": "user",
+      "title": "5 nuevos usuarios registrados",
+      "description": "Expansión del equipo de desarrollo",
+      "date": "2025-10-14",
+      "status": "completed"
+    },
+    {
+      "id": 3,
+      "type": "revenue",
+      "title": "Meta mensual alcanzada",
+      "description": "Ingresos superaron expectativas en 15%",
+      "date": "2025-10-13",
+      "status": "completed"
+    }
+  ],
+  "modules": [
+    "Gestión de Proyectos",
+    "Control de Usuarios",
+    "Reportes Financieros",
+    "Inventario de Dispositivos",
+    "Soporte Técnico"
+  ]
+}

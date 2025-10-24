@@ -1,0 +1,550 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+/* ============================================
+   RESET Y BASE
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ============================================
+   SISTEMA DE TEMAS - VARIABLES GLOBALES
+   ============================================ */
+
+/* Variables Base (legacy - mantener compatibilidad) */
+:root {
+  --primary-green: #8bc34a;
+  --electric-green: #76ff03;
+  --dark-green: #689f38;
+  --bg-dark: #1a1a1a;
+  --bg-card: rgba(30, 30, 30, 0.85);
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --border-color: rgba(139, 195, 74, 0.3);
+}
+
+/* ============================================
+   TEMA POR DEFECTO - VERDE (Sin data-theme)
+   ============================================ */
+body {
+  /* Colores Base Verde */
+  --primary-green: #8bc34a;
+  --electric-green: #76ff03;
+  --dark-green: #689f38;
+
+  /* Fondos - BLANCO + CARDS PLOMO LÍQUIDO */
+  --bg-primary: linear-gradient(135deg, #ffffff 0%, #f5fef0 100%);
+  --bg-secondary: linear-gradient(180deg, #ffffff 0%, #f5fef0 100%);
+  --bg-page: linear-gradient(135deg, #ffffff 0%, #f9fdf7 50%, #f5fef0 100%);
+  --bg-card: linear-gradient(135deg, #37474f 0%, #455a64 25%, #546e7a 50%, #455a64 75%, #37474f 100%);
+  --bg-card-alt: rgba(55, 71, 79, 0.15);
+  --bg-sidebar: linear-gradient(180deg, #ffffff 0%, #f5fef0 50%, #e8f9dd 100%);
+  --bg-header: linear-gradient(135deg, #7cb342 0%, #689f38 100%);
+  --bg-footer: linear-gradient(135deg, #7cb342 0%, #689f38 100%);
+  
+  /* Textos - BLANCOS PARA CARDS PLOMO */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.95);
+  --text-tertiary: rgba(255, 255, 255, 0.85);
+  --text-muted: rgba(255, 255, 255, 0.75);
+  
+  /* Bordes */
+  --border-color: rgba(139, 195, 74, 0.3);
+  --border-hover: rgba(139, 195, 74, 0.6);
+  --border-active: rgba(139, 195, 74, 0.8);
+  
+  /* Acentos */
+  --accent-color: #8bc34a;
+  --accent-hover: #76ff03;
+  --accent-light: rgba(139, 195, 74, 0.2);
+  --accent-lighter: rgba(139, 195, 74, 0.1);
+  
+  /* Sombras */
+  --card-shadow: 0 4px 20px rgba(55, 71, 79, 0.3);
+  --card-hover-shadow: 0 12px 40px rgba(139, 195, 74, 0.4);
+  --glow-shadow: 0 0 20px rgba(139, 195, 74, 0.5);
+  
+  /* Botones */
+  --button-bg: rgba(255, 255, 255, 0.2);
+  --button-border: rgba(255, 255, 255, 0.4);
+  --button-hover-bg: rgba(255, 255, 255, 0.3);
+  --button-hover-border: rgba(255, 255, 255, 0.6);
+  
+  /* Dropdowns */
+  --dropdown-bg: linear-gradient(135deg, #f1f8e9 0%, #dcedc8 100%);
+  --dropdown-border: rgba(139, 195, 74, 0.5);
+  --dropdown-item-hover: rgba(139, 195, 74, 0.2);
+  
+  /* Estados */
+  --success-color: #66bb6a;
+  --warning-color: #ffa726;
+  --danger-color: #ef5350;
+  --info-color: #4a90e2;
+}
+
+/* ============================================
+   TEMA VERDE (Explícito)
+   ============================================ */
+body[data-theme="green"] {
+  /* Colores Base Verde */
+  --primary-green: #8bc34a;
+  --electric-green: #76ff03;
+  --dark-green: #689f38;
+
+  /* Fondos - BLANCO + CARDS PLOMO LÍQUIDO */
+  --bg-primary: linear-gradient(135deg, #ffffff 0%, #f5fef0 100%);
+  --bg-secondary: linear-gradient(180deg, #ffffff 0%, #f5fef0 100%);
+  --bg-page: linear-gradient(135deg, #ffffff 0%, #f9fdf7 50%, #f5fef0 100%);
+  --bg-card: linear-gradient(135deg, #37474f 0%, #455a64 25%, #546e7a 50%, #455a64 75%, #37474f 100%);
+  --bg-card-alt: rgba(55, 71, 79, 0.15);
+  --bg-sidebar: linear-gradient(180deg, #ffffff 0%, #f5fef0 50%, #e8f9dd 100%);
+  --bg-header: linear-gradient(135deg, #7cb342 0%, #689f38 100%);
+  --bg-footer: linear-gradient(135deg, #7cb342 0%, #689f38 100%);
+  
+  /* Textos - BLANCOS PARA CARDS PLOMO */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.95);
+  --text-tertiary: rgba(255, 255, 255, 0.85);
+  --text-muted: rgba(255, 255, 255, 0.75);
+  
+  /* Bordes */
+  --border-color: rgba(139, 195, 74, 0.3);
+  --border-hover: rgba(139, 195, 74, 0.6);
+  --border-active: rgba(139, 195, 74, 0.8);
+  
+  /* Acentos */
+  --accent-color: #8bc34a;
+  --accent-hover: #76ff03;
+  --accent-light: rgba(139, 195, 74, 0.2);
+  --accent-lighter: rgba(139, 195, 74, 0.1);
+  
+  /* Sombras */
+  --card-shadow: 0 4px 20px rgba(55, 71, 79, 0.3);
+  --card-hover-shadow: 0 12px 40px rgba(139, 195, 74, 0.4);
+  --glow-shadow: 0 0 20px rgba(139, 195, 74, 0.5);
+  
+  /* Botones */
+  --button-bg: rgba(255, 255, 255, 0.2);
+  --button-border: rgba(255, 255, 255, 0.4);
+  --button-hover-bg: rgba(255, 255, 255, 0.3);
+  --button-hover-border: rgba(255, 255, 255, 0.6);
+  
+  /* Dropdowns */
+  --dropdown-bg: linear-gradient(135deg, #f1f8e9 0%, #dcedc8 100%);
+  --dropdown-border: rgba(139, 195, 74, 0.5);
+  --dropdown-item-hover: rgba(139, 195, 74, 0.2);
+  
+  /* Estados */
+  --success-color: #66bb6a;
+  --warning-color: #ffa726;
+  --danger-color: #ef5350;
+  --info-color: #4a90e2;
+}
+
+/* ============================================
+   TEMA OSCURO (Azul Marino) - SIN CAMBIOS
+   ============================================ */
+body[data-theme="dark"] {
+  /* Colores Base Azul */
+  --primary-blue: #2c5282;
+  --dark-blue: #1e3a5f;
+  --light-blue: #4a90e2;
+  --accent-blue: #5da3f5;
+
+  /* Fondos - LÍQUIDO AZUL CLARO */
+  --bg-primary: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+  --bg-secondary: linear-gradient(180deg, #1e3a5f 0%, #2c5282 100%);
+  --bg-page: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 25%, #90caf9 50%, #bbdefb 75%, #e3f2fd 100%);
+  --bg-card: linear-gradient(135deg, #2c5282 0%, #1e3a5f 100%);
+  --bg-card-alt: rgba(44, 82, 130, 0.5);
+  --bg-sidebar: linear-gradient(180deg, #1e3a5f 0%, #2c5282 50%, #1e3a5f 100%);
+  --bg-header: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+  --bg-footer: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+  
+  /* Textos */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.85);
+  --text-tertiary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.6);
+  
+  /* Bordes */
+  --border-color: rgba(74, 144, 226, 0.3);
+  --border-hover: rgba(74, 144, 226, 0.6);
+  --border-active: rgba(74, 144, 226, 0.8);
+  
+  /* Acentos */
+  --accent-color: #4a90e2;
+  --accent-hover: #5da3f5;
+  --accent-light: rgba(74, 144, 226, 0.2);
+  --accent-lighter: rgba(74, 144, 226, 0.1);
+  
+  /* Sombras */
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --card-hover-shadow: 0 12px 40px rgba(74, 144, 226, 0.4);
+  --glow-shadow: 0 0 20px rgba(74, 144, 226, 0.5);
+  
+  /* Botones */
+  --button-bg: rgba(255, 255, 255, 0.15);
+  --button-border: rgba(255, 255, 255, 0.3);
+  --button-hover-bg: rgba(255, 255, 255, 0.25);
+  --button-hover-border: rgba(255, 255, 255, 0.5);
+  
+  /* Dropdowns */
+  --dropdown-bg: linear-gradient(135deg, #2c5282 0%, #1e3a5f 100%);
+  --dropdown-border: rgba(74, 144, 226, 0.5);
+  --dropdown-item-hover: rgba(74, 144, 226, 0.2);
+  
+  /* Estados */
+  --success-color: #66bb6a;
+  --warning-color: #ffa726;
+  --danger-color: #ef5350;
+  --info-color: #4a90e2;
+}
+
+/* ============================================
+   TEMA CLARO (Blanco/Azul) - SIN CAMBIOS
+   ============================================ */
+body[data-theme="light"] {
+  /* Colores Base Azul */
+  --primary-blue: #2c5282;
+  --dark-blue: #1e3a5f;
+  --light-blue: #4a90e2;
+  --accent-blue: #5da3f5;
+
+  /* Fondos */
+  --bg-primary: linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%);
+  --bg-secondary: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+  --bg-page: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 25%, #bae6fd 50%, #e0f2fe 75%, #f0f9ff 100%);
+  --bg-card: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  --bg-card-alt: rgba(255, 255, 255, 0.95);
+  --bg-sidebar: linear-gradient(180deg, #ffffff 0%, #f0f4f8 50%, #e8f0f8 100%);
+  --bg-header: linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%);
+  --bg-footer: linear-gradient(135deg, #f0f4f8 0%, #ffffff 100%);
+  
+  /* Textos */
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-tertiary: #64748b;
+  --text-muted: #94a3b8;
+  
+  /* Bordes */
+  --border-color: rgba(44, 82, 130, 0.15);
+  --border-hover: rgba(44, 82, 130, 0.3);
+  --border-active: rgba(44, 82, 130, 0.5);
+  
+  /* Acentos */
+  --accent-color: #2c5282;
+  --accent-hover: #1e3a5f;
+  --accent-light: rgba(44, 82, 130, 0.1);
+  --accent-lighter: rgba(44, 82, 130, 0.05);
+  
+  /* Sombras */
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --card-hover-shadow: 0 12px 40px rgba(44, 82, 130, 0.2);
+  --glow-shadow: 0 0 20px rgba(44, 82, 130, 0.3);
+  
+  /* Botones */
+  --button-bg: rgba(44, 82, 130, 0.08);
+  --button-border: rgba(44, 82, 130, 0.2);
+  --button-hover-bg: rgba(44, 82, 130, 0.15);
+  --button-hover-border: rgba(44, 82, 130, 0.35);
+  
+  /* Dropdowns */
+  --dropdown-bg: linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%);
+  --dropdown-border: rgba(44, 82, 130, 0.25);
+  --dropdown-item-hover: rgba(44, 82, 130, 0.1);
+  
+  /* Estados */
+  --success-color: #22c55e;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+  --info-color: #3b82f6;
+}
+
+/* ============================================
+   ESTILOS BASE DEL BODY
+   ============================================ */
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ============================================
+   SCROLLBAR PERSONALIZADO
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-card-alt);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-hover);
+}
+
+/* ============================================
+   ANIMACIONES GLOBALES
+   ============================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ============================================
+   CLASES DE UTILIDAD
+   ============================================ */
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.slide-in {
+  animation: slideIn 0.4s ease-out;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.4s ease-out;
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.shimmer {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(
+    to right,
+    var(--bg-card) 0%,
+    var(--accent-lighter) 50%,
+    var(--bg-card) 100%
+  );
+  background-size: 2000px 100%;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+.bounce {
+  animation: bounce 1s ease infinite;
+}
+
+/* ============================================
+   ESTILOS DE ENFOQUE Y SELECCIÓN
+   ============================================ */
+::selection {
+  background-color: var(--accent-color);
+  color: var(--text-primary);
+}
+
+::-moz-selection {
+  background-color: var(--accent-color);
+  color: var(--text-primary);
+}
+
+*:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ============================================
+   ESTILOS GLOBALES DE FORMULARIOS
+   ============================================ */
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ============================================
+   UTILIDADES DE DISPLAY
+   ============================================ */
+.hidden {
+  display: none !important;
+}
+
+.visible {
+  display: block !important;
+}
+
+.flex {
+  display: flex !important;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid {
+  display: grid !important;
+}
+
+/* ============================================
+   UTILIDADES DE TEXTO
+   ============================================ */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-accent {
+  color: var(--accent-color);
+}
+
+/* ============================================
+   RESPONSIVE HELPERS
+   ============================================ */
+@media (max-width: 1024px) {
+  .hide-tablet {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .show-mobile-only {
+    display: none !important;
+  }
+}

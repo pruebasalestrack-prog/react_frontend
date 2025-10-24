@@ -1,0 +1,16 @@
+{
+  "id": "db_pure_clientes",
+  "name": "Pure Clientes",
+  "menuGroups": [
+    {
+      "title": "MENÚ",
+      "items": [
+        { 
+          "icon": "Settings", 
+          "label": "Opciones", 
+          "path": "/dashboard/options" 
+        }
+      ]
+    }
+  ]
+}
