@@ -9,6 +9,7 @@ import LoginPage from "./modules/login/pages/LoginPage"
 import ForgotPasswordPage from "./modules/forgot-password/pages/ForgotPasswordPage"
 import DashboardLayout from "./modules/dashboard/layouts/DashboardLayout"
 import DashboardHome from "./modules/dashboard/pages/DashboardHome"
+import OptionsPurePage from "./modules/dashboard/secure_pure/options"
 import SessionAlerts from "./shared/components/SessionAlerts"
 
 const ProtectedRoute = ({ children }) => {
@@ -28,10 +29,13 @@ function AppContent() {
     <>
       <SessionAlerts />
       <AnimatePresence>
-        {showLoadingScreen && <LoadingScreen message={loadingMessage} destination={loadingDestination} />}
+        {showLoadingScreen && (
+          <LoadingScreen message={loadingMessage} destination={loadingDestination} />
+        )}
       </AnimatePresence>
 
       <Routes>
+        {/* Rutas públicas */}
         <Route
           path="/login"
           element={
@@ -48,6 +52,8 @@ function AppContent() {
             </PublicRoute>
           }
         />
+
+        {/* Dashboard con Layout (Sidebar, Header, Footer se mantienen) */}
         <Route
           path="/dashboard"
           element={
@@ -56,8 +62,12 @@ function AppContent() {
             </ProtectedRoute>
           }
         >
+          {/* Solo el contenido del medio cambia aquí */}
           <Route index element={<DashboardHome />} />
+          <Route path="secure_pure/options" element={<OptionsPurePage />} />
         </Route>
+
+        {/* Redirecciones */}
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>

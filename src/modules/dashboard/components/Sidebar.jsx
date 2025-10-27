@@ -1,5 +1,5 @@
 "use client"
-import { Link, useLocation } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import * as Icons from "lucide-react"
 import { useState, useMemo } from "react"
@@ -172,7 +172,6 @@ const Sidebar = ({ isOpen, onToggle }) => {
                 const Icon = getIcon(item.icon)
                 const hasSubItems = item.subItems && item.subItems.length > 0
                 const isExpanded = expandedItems[item.label]
-                const isActive = location.pathname === item.path
 
                 return (
                   <div key={itemIndex}>
@@ -218,17 +217,18 @@ const Sidebar = ({ isOpen, onToggle }) => {
                               {item.subItems.map((subItem, subIndex) => {
                                 // ✨ Obtener icono dinámicamente para sub-items
                                 const SubIcon = getIcon(subItem.icon)
-                                const isSubActive = location.pathname === subItem.path
 
                                 return (
-                                  <Link
+                                  <NavLink
                                     key={subIndex}
                                     to={subItem.path}
-                                    className={`sidebar-sub-item ${isSubActive ? "active" : ""}`}
+                                    className={({ isActive }) => 
+                                      `sidebar-sub-item ${isActive ? "active" : ""}`
+                                    }
                                   >
                                     <SubIcon size={18} className="sidebar-item-icon" />
                                     <span className="sidebar-item-label">{subItem.label}</span>
-                                  </Link>
+                                  </NavLink>
                                 )
                               })}
                             </motion.div>
@@ -236,7 +236,12 @@ const Sidebar = ({ isOpen, onToggle }) => {
                         </AnimatePresence>
                       </>
                     ) : (
-                      <Link to={item.path} className={`sidebar-item ${isActive ? "active" : ""}`}>
+                      <NavLink 
+                        to={item.path} 
+                        className={({ isActive }) => 
+                          `sidebar-item ${isActive ? "active" : ""}`
+                        }
+                      >
                         <Icon size={22} className="sidebar-item-icon" />
                         <AnimatePresence>
                           {isOpen && (
@@ -250,7 +255,7 @@ const Sidebar = ({ isOpen, onToggle }) => {
                             </motion.span>
                           )}
                         </AnimatePresence>
-                      </Link>
+                      </NavLink>
                     )}
                   </div>
                 )

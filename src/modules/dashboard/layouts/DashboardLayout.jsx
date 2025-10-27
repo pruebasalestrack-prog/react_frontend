@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import Sidebar from "../../dashboard/components/Sidebar"
 import Header from "../../dashboard/components/Header"
@@ -10,6 +10,7 @@ import "./DashboardLayout.css"
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const location = useLocation()
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)

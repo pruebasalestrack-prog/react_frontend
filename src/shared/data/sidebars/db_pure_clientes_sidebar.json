@@ -8,7 +8,7 @@
         { 
           "icon": "Settings", 
           "label": "Opciones", 
-          "path": "/dashboard/options" 
+          "path": "/dashboard/secure_pure/options" 
         }
       ]
     }
