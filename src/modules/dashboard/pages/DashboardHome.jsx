@@ -3,67 +3,15 @@ import { motion } from "framer-motion"
 import { useAuth } from "../../../shared/context/AuthContext"
 import { useSession } from "../../../shared/context/SessionContext"
 import { useTheme } from "../../../shared/context/ThemeContext"
-import { Users, FolderKanban, DollarSign, CheckCircle, TrendingUp, Activity, Clock, AlertTriangle, Bell } from "lucide-react"
-import { useState, useEffect } from "react"
-import { AnimatePresence } from "framer-motion"
+import { Users, FolderKanban, DollarSign, CheckCircle, TrendingUp, Activity } from "lucide-react"
 import SalesChart from "../../dashboard/components/charts/SalesChart"
 import "./DashboardHome.css"
 
 const DashboardHome = () => {
-  const { user, logout } = useAuth()
+  const { user } = useAuth()
   const { showSessionAlert } = useSession()
   const { theme } = useTheme()
   const dbData = user?.databaseData
-  const [isIdle, setIsIdle] = useState(false)
-  const [idleTime, setIdleTime] = useState(0)
-  const [showExpiredModal, setShowExpiredModal] = useState(false)
-
-  useEffect(() => {
-    let idleTimer
-    let idleCounter = 0
-
-    const resetIdleTimer = () => {
-      idleCounter = 0
-      setIdleTime(0)
-      setIsIdle(false)
-    }
-
-    const checkIdle = () => {
-      idleCounter++
-      setIdleTime(idleCounter)
-
-      if (idleCounter >= 30 && idleCounter < 60) {
-        setIsIdle(true)
-      }
-
-      if (idleCounter >= 60) {
-        setIsIdle(false)
-        setShowExpiredModal(true)
-        clearInterval(idleTimer)
-      }
-    }
-
-    const events = ["mousedown", "mousemove", "keypress", "scroll", "touchstart", "click"]
-    events.forEach((event) => {
-      document.addEventListener(event, resetIdleTimer)
-    })
-
-    idleTimer = setInterval(checkIdle, 1000)
-
-    return () => {
-      clearInterval(idleTimer)
-      events.forEach((event) => {
-        document.removeEventListener(event, resetIdleTimer)
-      })
-    }
-  }, [])
-
-  const handleLogout = () => {
-    if (logout) {
-      logout()
-    }
-    window.location.href = "/login"
-  }
 
   const stats = [
     {
@@ -98,73 +46,6 @@ const DashboardHome = () => {
 
   return (
     <div className="dashboard-home">
-      {/* Modal de sesión expirada - BLOQUEANTE Y CENTRADO */}
-      <AnimatePresence>
-        {showExpiredModal && (
-          <>
-            <motion.div
-              className="modal-overlay-centered"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-            />
-            <motion.div
-              className="expired-modal-centered"
-              initial={{ opacity: 0, scale: 0.7, y: -100 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.7, y: -100 }}
-              transition={{ duration: 0.4, type: "spring", bounce: 0.3 }}
-            >
-              <div className="expired-modal-icon">
-                <AlertTriangle size={56} />
-              </div>
-              <h2>⏱️ Sesión Expirada</h2>
-              <p>Tu sesión ha expirado por inactividad. Por seguridad, debes iniciar sesión nuevamente.</p>
-              <button className="expired-modal-button" onClick={handleLogout}>
-                Ir al Login
-              </button>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-
-      {/* Notificación de inactividad - ARRIBA (NO BLOQUEANTE) */}
-      <AnimatePresence>
-        {isIdle && !showExpiredModal && (
-          <motion.div
-            className="idle-notification-top"
-            initial={{ opacity: 0, y: -100 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -100 }}
-            transition={{ duration: 0.5, type: "spring" }}
-          >
-            <div className="idle-notification-content">
-              <div className="idle-notification-icon">
-                <Bell size={24} />
-              </div>
-              <div className="idle-notification-text">
-                <h4>⚠️ Inactividad Detectada</h4>
-                <p>
-                  Tu sesión expirará en <span className="countdown-number">{60 - idleTime}</span> segundos
-                </p>
-              </div>
-              <button className="idle-continue-btn-small" onClick={() => setIsIdle(false)}>
-                ✓ Continuar
-              </button>
-            </div>
-            <div className="idle-progress-bar">
-              <motion.div
-                className="idle-progress-fill"
-                initial={{ width: "100%" }}
-                animate={{ width: "0%" }}
-                transition={{ duration: 30, ease: "linear" }}
-              />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Welcome section */}
       <motion.div
         className="welcome-section"

@@ -5,10 +5,11 @@
 }
 
 .table-scroll-wrapper {
-  background: white;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
   max-height: calc(100vh - 400px);
   overflow-x: auto;
   overflow-y: auto;
@@ -28,7 +29,7 @@
   top: 0;
   z-index: 100;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .thead-modern-sticky th {
@@ -69,11 +70,11 @@
 /* Filas de la tabla */
 .tr-modern {
   transition: all 0.3s ease;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid rgba(241, 245, 249, 0.5);
 }
 
 .tr-modern:hover {
-  background: linear-gradient(90deg, #f8fafc 0%, #f1f5f9 100%);
+  background: rgba(248, 250, 252, 0.6);
   transform: translateX(4px);
 }
 
@@ -151,13 +152,13 @@
 .url-tag {
   display: inline-block;
   padding: 0.375rem 0.75rem;
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  background: rgba(219, 234, 254, 0.9);
   color: #1e40af;
   border-radius: 8px;
   font-size: 0.8rem;
   font-weight: 600;
   font-family: 'Courier New', monospace;
-  border: 1px solid #93c5fd;
+  border: 1px solid rgba(147, 197, 253, 0.6);
 }
 
 /* Permisos centrados */

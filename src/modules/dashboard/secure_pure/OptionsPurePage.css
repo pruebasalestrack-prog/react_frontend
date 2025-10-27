@@ -1,15 +1,15 @@
 .modern-options-page {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: transparent;
   padding: 0;
 }
 
-/* Header moderno con gradiente */
+/* Header moderno con gradiente - SIN sombra pesada */
 .modern-header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .header-content {
@@ -60,7 +60,7 @@
   box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* Toolbar moderna */
+/* Toolbar moderna - MÁS INTEGRADA */
 .toolbar-modern {
   max-width: 1400px;
   margin: 0 auto;
@@ -69,10 +69,11 @@
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  background: white;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
   border-radius: 16px;
   margin-top: -1.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
   position: relative;
   z-index: 10;
 }
@@ -99,7 +100,7 @@
   font-size: 0.95rem;
   color: #334155;
   transition: all 0.3s ease;
-  background: #f8fafc;
+  background: rgba(248, 250, 252, 0.8);
 }
 
 .search-input-modern:focus {
@@ -120,7 +121,7 @@
   justify-content: center;
   width: 42px;
   height: 42px;
-  background: #f8fafc;
+  background: rgba(248, 250, 252, 0.8);
   border: 2px solid #e2e8f0;
   border-radius: 10px;
   color: #64748b;
@@ -165,7 +166,7 @@
   border-radius: 8px;
   font-size: 0.9rem;
   color: #334155;
-  background: white;
+  background: rgba(255, 255, 255, 0.9);
   cursor: pointer;
   transition: all 0.3s ease;
   appearance: none;
@@ -193,7 +194,7 @@
 
 .pagination-btn-modern {
   padding: 0.75rem 1.5rem;
-  background: white;
+  background: rgba(255, 255, 255, 0.9);
   border: 2px solid #e2e8f0;
   border-radius: 10px;
   color: #334155;
@@ -222,7 +223,7 @@
 .pagination-number {
   width: 42px;
   height: 42px;
-  background: white;
+  background: rgba(255, 255, 255, 0.9);
   border: 2px solid #e2e8f0;
   border-radius: 10px;
   color: #334155;

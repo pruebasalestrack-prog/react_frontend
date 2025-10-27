@@ -4,6 +4,8 @@ import { AnimatePresence } from "framer-motion"
 import { AuthProvider, useAuth } from "./shared/context/AuthContext"
 import { ThemeProvider } from "./shared/context/ThemeContext"
 import { SessionProvider } from "./shared/context/SessionContext"
+import { SessionLockProvider } from "./modules/session-lock/SessionLockContext"
+import SessionLockModal from "./modules/session-lock/SessionLockModal"
 import LoadingScreen from "./shared/components/LoadingScreen"
 import LoginPage from "./modules/login/pages/LoginPage"
 import ForgotPasswordPage from "./modules/forgot-password/pages/ForgotPasswordPage"
@@ -28,6 +30,10 @@ function AppContent() {
   return (
     <>
       <SessionAlerts />
+      
+      {/* 🔒 Modal de bloqueo de sesión - Se muestra automáticamente */}
+      <SessionLockModal />
+      
       <AnimatePresence>
         {showLoadingScreen && (
           <LoadingScreen message={loadingMessage} destination={loadingDestination} />
@@ -81,7 +87,10 @@ function App() {
       <AuthProvider>
         <ThemeProvider>
           <SessionProvider>
-            <AppContent />
+            {/* 🔒 SessionLockProvider envuelve toda la app */}
+            <SessionLockProvider>
+              <AppContent />
+            </SessionLockProvider>
           </SessionProvider>
         </ThemeProvider>
       </AuthProvider>

@@ -70,6 +70,11 @@ export const useLoginController = () => {
       const userId = userData.id
       const databaseId = userData.databaseData?.id || "default_db"
 
+      // 🔒 IMPORTANTE: Guardar la contraseña para el session lock
+      // Esto permite validar el desbloqueo de sesión
+      localStorage.setItem('userPassword', formData.password)
+      console.log('🔐 Contraseña guardada para session lock')
+
       // Si es forzado, cerrar sesión remota
       if (forceLogin) {
         forceCloseRemoteSession(userId, databaseId)

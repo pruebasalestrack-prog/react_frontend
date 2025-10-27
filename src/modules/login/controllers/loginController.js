@@ -12,16 +12,21 @@ export const loginUser = async (email, password) => {
     throw new Error("Credenciales inválidas. Por favor, verifica tu email y contraseña.")
   }
 
+  // 🔒 IMPORTANTE: Guardar la contraseña temporalmente para el session lock
+  // NOTA: Esto es solo para desarrollo/demo. En producción, usa tokens JWT o similar
+  localStorage.setItem('userPassword', password)
+
   // Cargar datos de la base de datos asignada al usuario
   const dbModule = await import(`../../../shared/data/databases/${user.database}.json`)
   const dbData = dbModule.default
 
   return {
+    id: user.id,
     email: user.email,
     username: user.username,
     role: user.role,
     database: user.database,
-    dbData: dbData,
+    databaseData: dbData,
   }
 }
 
@@ -45,9 +50,31 @@ export const loginUser = async (email, password) => {
       }
 
       const data = await response.json();
+      
+      // Para el session lock, guarda un token de refresco o similar
+      localStorage.setItem('refreshToken', data.refreshToken);
+      
       return data;
     } catch (error) {
       throw error;
+    }
+  };
+  
+  // Para validar el desbloqueo con tu API:
+  export const validateUnlock = async (password) => {
+    try {
+      const response = await fetch('https://tu-api.com/api/auth/validate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('refreshToken')}`
+        },
+        body: JSON.stringify({ password }),
+      });
+
+      return response.ok;
+    } catch (error) {
+      return false;
     }
   };
 */
