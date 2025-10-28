@@ -1,0 +1,191 @@
+.login-illustration {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.logo-container {
+  margin-bottom: 2rem;
+  z-index: 2;
+}
+
+.logo-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  filter: drop-shadow(0 10px 30px rgba(139, 195, 74, 0.3)) blur(0.5px);
+  mix-blend-mode: screen;
+}
+
+.main-illustration {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  z-index: 1;
+}
+
+.illustration-image {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4)) blur(1px);
+  mix-blend-mode: screen;
+  opacity: 0.9;
+}
+
+.decorative-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--primary-green), transparent);
+  filter: blur(40px);
+}
+
+.circle-1 {
+  width: 300px;
+  height: 300px;
+  top: 10%;
+  left: -10%;
+}
+
+.circle-2 {
+  width: 250px;
+  height: 250px;
+  bottom: 15%;
+  right: -5%;
+}
+
+.circle-3 {
+  width: 200px;
+  height: 200px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.illustration-text {
+  text-align: center;
+  margin-top: 2rem;
+  z-index: 2;
+}
+
+.illustration-text h3 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--primary-green), var(--electric-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.illustration-text p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .login-illustration {
+    max-width: 500px;
+  }
+
+  .logo-image {
+    max-width: 350px;
+  }
+
+  .main-illustration {
+    max-width: 400px;
+  }
+
+  .illustration-text h3 {
+    font-size: 1.5rem;
+  }
+
+  .illustration-text p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-illustration {
+    padding: 1.5rem;
+    max-width: 100%;
+  }
+
+  .logo-container {
+    margin-bottom: 1.5rem;
+  }
+
+  .logo-image {
+    max-width: 300px;
+  }
+
+  .main-illustration {
+    max-width: 350px;
+  }
+
+  .circle-1 {
+    width: 200px;
+    height: 200px;
+  }
+
+  .circle-2 {
+    width: 180px;
+    height: 180px;
+  }
+
+  .circle-3 {
+    width: 150px;
+    height: 150px;
+  }
+
+  .illustration-text h3 {
+    font-size: 1.35rem;
+  }
+
+  .illustration-text p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-illustration {
+    padding: 1rem;
+  }
+
+  .logo-image {
+    max-width: 250px;
+  }
+
+  .main-illustration {
+    max-width: 280px;
+  }
+
+  .illustration-text {
+    margin-top: 1.5rem;
+  }
+
+  .illustration-text h3 {
+    font-size: 1.2rem;
+  }
+
+  .illustration-text p {
+    font-size: 0.85rem;
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "database_name": "db_pure_ecuador",
+  "description": "Base de datos Pure Ecuador",
+  "stats": {
+    "total_users": 65,
+    "active_projects": 12,
+    "total_revenue": 195000,
+    "pending_tasks": 6
+  },
+  "recent_activities": [
+    {
+      "id": 1,
+      "type": "expansion",
+      "title": "Apertura de nueva sucursal",
+      "description": "Oficina en Guayaquil operativa",
+      "date": "2025-10-18",
+      "status": "active"
+    },
+    {
+      "id": 2,
+      "type": "training",
+      "title": "Capacitación de equipo completada",
+      "description": "Certificación en tecnologías móviles",
+      "date": "2025-10-15",
+      "status": "completed"
+    }
+  ],
+  "modules": ["Operaciones Ecuador", "Ventas Locales", "Distribución", "Servicio Técnico"]
+}
