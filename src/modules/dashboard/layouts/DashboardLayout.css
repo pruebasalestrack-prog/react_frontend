@@ -3,7 +3,7 @@
   min-height: 100vh;
   background: var(--bg-page);
   transition: background 0.3s ease;
-  overflow-x: hidden; /* Evita scroll horizontal */
+  position: relative;
 }
 
 .dashboard-main {
@@ -11,9 +11,13 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  width: 100%;
-  /* Removemos la transición de margin-left */
-  will-change: transform; /* Optimización para GPU */
+  margin-left: 280px; /* Margen fijo para el sidebar abierto */
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Cuando el sidebar está cerrado */
+.dashboard-layout:has(.sidebar.closed) .dashboard-main {
+  margin-left: 80px;
 }
 
 .dashboard-content {
@@ -26,7 +30,7 @@
 
 @media (max-width: 1024px) {
   .dashboard-main {
-    transform: translateX(0) !important;
+    margin-left: 0 !important;
   }
 
   .dashboard-content {
