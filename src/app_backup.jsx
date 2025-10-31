@@ -19,71 +19,128 @@ import DashboardHome from "./modules/dashboard/pages/DashboardHome"
 import OptionsPurePage from "./modules/dashboard/secure_pure/options"
 import SessionAlerts from "./shared/components/SessionAlerts"
 
-// 🔒 TODAS LAS RUTAS REQUIEREN AUTENTICACIÓN (excepto login y forgot-password)
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading, user } = useAuth()
   const { showExpireModal } = useSessionLock()
   const location = useLocation()
+  const navigate = useNavigate()
+  const hasRedirectedRef = useRef(false)
   
   const sessionExpired = typeof window !== "undefined" && localStorage.getItem('session_expired') === 'true'
+
+  useEffect(() => {
+    // 🔒 Resetear flag al cambiar de ruta
+    if (location.pathname === '/login') {
+      hasRedirectedRef.current = false
+    }
+  }, [location.pathname])
 
   if (loading) {
     console.log("⏳ ProtectedRoute: Verificando autenticación...")
     return <div>Cargando...</div>
   }
 
-  // 🚫 Si no está autenticado, redirigir a login
+  // 🚫 Prevenir múltiples redirecciones
   if (!isAuthenticated || !user || showExpireModal || sessionExpired) {
-    console.log("❌ ProtectedRoute: Sin autenticación - Redirigiendo a login")
-    
-    // Limpiar flags problemáticos
-    if (sessionExpired) {
-      localStorage.removeItem('session_expired')
+    if (!hasRedirectedRef.current) {
+      hasRedirectedRef.current = true
+      console.log("❌ ProtectedRoute: Redirigiendo a login")
+      
+      // Limpiar flags problemáticos
+      if (sessionExpired) {
+        localStorage.removeItem('session_expired')
+      }
+      
+      // Usar setTimeout para evitar el bucle
+      setTimeout(() => {
+        navigate('/login', { replace: true })
+      }, 0)
     }
     
-    return <Navigate to="/login" state={{ from: location }} replace />
+    return <div>Redirigiendo...</div>
   }
 
   console.log("✅ ProtectedRoute: Acceso permitido a", location.pathname)
   return children
 }
 
-// 🔓 SOLO para Login y Forgot Password - Si ya está autenticado, redirige al dashboard
-const AuthOnlyRoute = ({ children }) => {
+const PublicRoute = ({ children }) => {
   const { isAuthenticated, loading, user } = useAuth()
+  const location = useLocation()
+  const navigate = useNavigate()
+  const hasRedirectedRef = useRef(false)
+
+  useEffect(() => {
+    // 🔒 Resetear flag al cambiar de ruta
+    if (location.pathname === '/dashboard') {
+      hasRedirectedRef.current = false
+    }
+  }, [location.pathname])
 
   if (loading) {
-    console.log("⏳ AuthOnlyRoute: Verificando autenticación...")
+    console.log("⏳ PublicRoute: Verificando autenticación...")
     return <div>Cargando...</div>
   }
 
   // ✅ Si está autenticado, redirigir al dashboard
   if (isAuthenticated && user) {
-    console.log("✅ AuthOnlyRoute: Usuario ya autenticado - Redirigiendo a dashboard")
-    return <Navigate to="/dashboard" replace />
+    if (!hasRedirectedRef.current) {
+      hasRedirectedRef.current = true
+      console.log("✅ PublicRoute: Usuario autenticado - Redirigiendo a dashboard")
+      
+      // Usar setTimeout para evitar el bucle
+      setTimeout(() => {
+        navigate('/dashboard', { replace: true })
+      }, 0)
+    }
+    
+    return <div>Redirigiendo al dashboard...</div>
   }
 
-  console.log("✅ AuthOnlyRoute: Acceso a página de autenticación permitido")
+  console.log("✅ PublicRoute: Acceso a ruta pública permitido")
   return children
 }
 
 function NavigationBlocker() {
   const navigate = useNavigate()
   const location = useLocation()
+  const isBlockingRef = useRef(false)
 
   useEffect(() => {
-    const handlePopState = () => {
+    const handlePopState = (e) => {
+      if (isBlockingRef.current) return
+      
       const auth = localStorage.getItem('auth')
       const logoutReason = localStorage.getItem('logout_reason')
       
-      if (!auth && logoutReason && location.pathname !== '/login' && location.pathname !== '/forgot-password') {
+      if (!auth && logoutReason && location.pathname !== '/login') {
         console.log('🚫 Bloqueando navegación - Sesión cerrada')
+        e.preventDefault()
+        
+        isBlockingRef.current = true
         window.history.pushState(null, '', '/login')
-        navigate('/login', { replace: true })
+        
+        setTimeout(() => {
+          navigate('/login', { replace: true })
+          isBlockingRef.current = false
+        }, 100)
       }
     }
 
     window.addEventListener('popstate', handlePopState)
+
+    const auth = localStorage.getItem('auth')
+    const logoutReason = localStorage.getItem('logout_reason')
+    
+    if (!auth && logoutReason && location.pathname !== '/login' && !isBlockingRef.current) {
+      console.log('🚫 Sesión cerrada detectada - Redirigiendo a login')
+      isBlockingRef.current = true
+      
+      setTimeout(() => {
+        navigate('/login', { replace: true })
+        isBlockingRef.current = false
+      }, 100)
+    }
 
     return () => {
       window.removeEventListener('popstate', handlePopState)
@@ -94,28 +151,54 @@ function NavigationBlocker() {
 }
 
 function SessionExpiredHandler() {
+  const navigate = useNavigate()
   const location = useLocation()
+  const hasHandledRef = useRef(false)
   
   useEffect(() => {
+    if (hasHandledRef.current) return
+    
     const sessionExpired = localStorage.getItem('session_expired')
+    const logoutReason = localStorage.getItem('logout_reason')
     
     if (sessionExpired === 'true' && location.pathname !== '/login') {
       console.log("🧹 Limpiando flag de sesión expirada")
       localStorage.removeItem('session_expired')
+      
+      hasHandledRef.current = true
+      window.history.replaceState(null, '', '/login')
+      
+      setTimeout(() => {
+        navigate('/login', { replace: true })
+        hasHandledRef.current = false
+      }, 100)
     }
-  }, [location.pathname])
+    else if (logoutReason && location.pathname !== '/login' && !hasHandledRef.current) {
+      console.log("🔒 Logout detectado - Forzando a login")
+      
+      hasHandledRef.current = true
+      window.history.replaceState(null, '', '/login')
+      
+      setTimeout(() => {
+        navigate('/login', { replace: true })
+        hasHandledRef.current = false
+      }, 100)
+    }
+  }, [navigate, location.pathname])
   
   return null
 }
 
 function PageReloadProtection() {
+  const navigate = useNavigate()
   const { isAuthenticated } = useAuth()
 
   useEffect(() => {
     const handleBeforeUnload = () => {
       if (!isAuthenticated) {
         console.log('🔄 Recarga detectada sin sesión activa')
-        // NO eliminar logout_reason para que las notificaciones se procesen
+        localStorage.removeItem('logout_reason')
+        localStorage.removeItem('session_expired')
       }
     }
 
@@ -125,6 +208,20 @@ function PageReloadProtection() {
       window.removeEventListener('beforeunload', handleBeforeUnload)
     }
   }, [isAuthenticated])
+
+  useEffect(() => {
+    const auth = localStorage.getItem('auth')
+    const logoutReason = localStorage.getItem('logout_reason')
+    
+    if (!auth && logoutReason) {
+      console.log('🚫 Sesión inválida al cargar - Limpiando historial')
+      window.history.replaceState(null, '', '/login')
+      
+      setTimeout(() => {
+        navigate('/login', { replace: true })
+      }, 100)
+    }
+  }, [navigate])
 
   return null
 }
@@ -150,12 +247,14 @@ function AppContent() {
       }
     }
 
+    blockNavigation()
+    window.history.pushState(null, '', window.location.href)
     window.addEventListener('popstate', blockNavigation)
 
     return () => {
       window.removeEventListener('popstate', blockNavigation)
     }
-  }, [])
+  }, [isAuthenticated])
   
   return (
     <>
@@ -177,25 +276,23 @@ function AppContent() {
       </AnimatePresence>
 
       <Routes>
-        {/* 🔓 ÚNICAS RUTAS SIN PROTECCIÓN: Login y Forgot Password */}
         <Route
           path="/login"
           element={
-            <AuthOnlyRoute>
+            <PublicRoute>
               <LoginPage />
-            </AuthOnlyRoute>
+            </PublicRoute>
           }
         />
         <Route
           path="/forgot-password"
           element={
-            <AuthOnlyRoute>
+            <PublicRoute>
               <ForgotPasswordPage />
-            </AuthOnlyRoute>
+            </PublicRoute>
           }
         />
 
-        {/* 🔒 TODAS LAS DEMÁS RUTAS REQUIEREN AUTENTICACIÓN */}
         <Route
           path="/dashboard"
           element={
@@ -208,7 +305,6 @@ function AppContent() {
           <Route path="secure_pure/options" element={<OptionsPurePage />} />
         </Route>
 
-        {/* 🔒 Cualquier otra ruta redirige a login si no está autenticado */}
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>

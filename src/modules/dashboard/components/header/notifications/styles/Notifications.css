@@ -592,3 +592,14 @@ body[data-theme="light"] .notification-close {
   opacity: 0 !important;
   pointer-events: none !important;
 }
+
+.notification-timestamp {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
+.notification-item.read .notification-timestamp {
+  color: #9ca3af;
+}

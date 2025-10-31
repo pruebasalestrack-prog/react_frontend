@@ -1,5 +1,3 @@
-// src/modules/login/api/authApi.js
-
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://192.168.100.254:8000/api"
 
 /**

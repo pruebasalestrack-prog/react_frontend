@@ -45,6 +45,13 @@ const NotificationItem = ({ notification }) => {
           <h4 className="notification-title">{notification.title}</h4>
         )}
         <p className="notification-message">{notification.message}</p>
+        
+        {/* 🕐 Mostrar fecha y hora */}
+        {notification.formattedDate && (
+          <p className="notification-timestamp">
+            {notification.formattedDate}
+          </p>
+        )}
       </div>
 
       <button 

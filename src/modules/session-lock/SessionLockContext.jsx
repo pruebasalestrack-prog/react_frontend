@@ -32,8 +32,9 @@ export const SessionLockProvider = ({ children }) => {
   const handleForceLogout = useCallback(async () => {
     console.log('🚪 Forzando cierre de sesión completo')
     
-    // 🔔 Guardar razón para notificación
-    localStorage.setItem('logout_reason', 'session_lock_expired')
+    // 🔔 Guardar la razón ANTES de hacer cualquier cosa
+    const currentLogoutReason = localStorage.getItem('logout_reason')
+    console.log('💾 Razón de logout actual:', currentLogoutReason)
     
     setShowExpireModal(true)
     
@@ -54,16 +55,17 @@ export const SessionLockProvider = ({ children }) => {
       // Limpiar TODO el localStorage
       localStorage.clear()
       
-      // 🔔 Restaurar la razón del logout después de clear
-      localStorage.setItem('logout_reason', 'session_lock_expired')
-      
-      // Marcar que la sesión expiró
-      localStorage.setItem('session_expired', 'true')
+      // 🔔 Restaurar SOLO la razón que teníamos guardada
+      if (currentLogoutReason) {
+        localStorage.setItem('logout_reason', currentLogoutReason)
+        console.log('✅ Razón de logout restaurada:', currentLogoutReason)
+      }
       
       console.log('✅ localStorage limpiado completamente')
       
       // Ejecutar logout del contexto (limpia estado y redirige)
-      logout('session_expired')  
+      // ⚠️ NO pasar razón aquí, ya está guardada en localStorage
+      logout()  
     }, 1000)
   }, [logout])
 
@@ -72,6 +74,11 @@ export const SessionLockProvider = ({ children }) => {
     if (!isLocked) return
 
     const handleBeforeUnload = (e) => {
+      console.log('🔄 Detectada recarga durante bloqueo')
+      
+      // 🔔 Guardar razón: RECARGA DURANTE BLOQUEO
+      localStorage.setItem('logout_reason', 'page_refresh')
+      
       // Guardar flag para detectar la recarga
       localStorage.setItem('force_logout_on_reload', 'true')
       
@@ -99,8 +106,10 @@ export const SessionLockProvider = ({ children }) => {
     if (forceLogoutFlag === 'true') {
       console.log('🔄 Recarga detectada durante bloqueo - Forzando logout inmediato')
       localStorage.removeItem('force_logout_on_reload')
-      // 🔔 Marcar como page_refresh ya que fue actualización
-      localStorage.setItem('logout_reason', 'page_refresh')
+      
+      // 🔔 La razón ya está guardada como 'page_refresh' en beforeunload
+      console.log('📋 Razón ya guardada: page_refresh')
+      
       handleForceLogout()
       return
     }
@@ -124,6 +133,10 @@ export const SessionLockProvider = ({ children }) => {
     // Si hay una expiración programada y ya pasó el tiempo
     if (expireAt && now >= expireAt) {
       console.log('⏰ Sesión expirada detectada - Forzando logout inmediato')
+      
+      // 🔔 Guardar razón: TIEMPO EXPIRADO
+      localStorage.setItem('logout_reason', 'session_lock_expired')
+      
       handleForceLogout()
       return
     }
@@ -134,6 +147,10 @@ export const SessionLockProvider = ({ children }) => {
       
       if (timeSinceLock >= LOCK_EXPIRATION) {
         console.log('⏰ Tiempo de bloqueo expirado - Forzando logout')
+        
+        // 🔔 Guardar razón: TIEMPO EXPIRADO
+        localStorage.setItem('logout_reason', 'session_lock_expired')
+        
         handleForceLogout()
       } else {
         console.log('🔒 Restaurando estado de bloqueo')
@@ -157,8 +174,7 @@ export const SessionLockProvider = ({ children }) => {
       localStorage.removeItem(LOCKED_AT_KEY)
       localStorage.removeItem(EXPIRE_AT_KEY)
       localStorage.removeItem('force_logout_on_reload')
-      localStorage.removeItem('session_expired')
-      localStorage.removeItem('logout_reason')
+      // 🔔 NO limpiar logout_reason aquí - se limpia después de mostrar notificación
       
       // Reiniciar estados
       setIsLocked(false)
@@ -226,9 +242,12 @@ export const SessionLockProvider = ({ children }) => {
         localStorage.setItem(ACTIVITY_STORAGE_KEY, now.toString())
         localStorage.removeItem(LOCKED_AT_KEY)
         localStorage.removeItem(EXPIRE_AT_KEY)
-        localStorage.removeItem('session_expired')
         localStorage.removeItem('force_logout_on_reload')
+        
+        // ✅ CRÍTICO: Limpiar logout_reason para NO enviar notificación
         localStorage.removeItem('logout_reason')
+        
+        console.log('✅ Sesión desbloqueada exitosamente - SIN notificación')
         
         setIsUnlocking(false)
         return true
@@ -287,6 +306,11 @@ export const SessionLockProvider = ({ children }) => {
       if (expireAt && now >= expireAt) {
         console.log('⏰ Tiempo de desbloqueo expirado')
         clearInterval(expireCheckTimerRef.current)
+        
+        // 🔔 Guardar razón: TIEMPO EXPIRADO
+        localStorage.setItem('logout_reason', 'session_lock_expired')
+        console.log('💾 Guardada razón: session_lock_expired')
+        
         handleForceLogout()
       } else if (expireAt) {
         const remaining = Math.ceil((expireAt - now) / 1000)
@@ -318,6 +342,7 @@ export const SessionLockProvider = ({ children }) => {
       localStorage.removeItem(LOCKED_AT_KEY)
       localStorage.removeItem(EXPIRE_AT_KEY)
       localStorage.removeItem('force_logout_on_reload')
+      // 🔔 NO limpiar logout_reason aquí - se necesita para la notificación
     }
   }, [isAuthenticated])
 

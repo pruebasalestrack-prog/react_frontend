@@ -1,3 +1,4 @@
+// Usar la variable de entorno VITE_API_URL
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://192.168.100.254:8000/api"
 
 /**
@@ -100,6 +101,13 @@ class ConnectionService {
    */
   getActiveConnection() {
     return this.getLastConnection()
+  }
+
+  /**
+   * Obtener la URL base de la API
+   */
+  getApiBaseUrl() {
+    return API_BASE_URL
   }
 }
 

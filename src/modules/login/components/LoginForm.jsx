@@ -84,7 +84,7 @@ const LoginForm = ({ formData, errors, loading, showPassword, onSubmit, onChange
                     name="email"
                     value={formData.email}
                     onChange={onChange}
-                    placeholder="info@pure.ec"
+                    placeholder="usuario@dominio.com"
                     className={errors.email ? "error" : ""}
                     disabled={loading}
                   />
@@ -161,7 +161,7 @@ const LoginForm = ({ formData, errors, loading, showPassword, onSubmit, onChange
                     Ingresando...
                   </>
                 ) : (
-                  "LOGIN"
+                  "iniciar sesión"
                 )}
               </motion.button>
             </form>
@@ -204,7 +204,7 @@ const LoginForm = ({ formData, errors, loading, showPassword, onSubmit, onChange
                     name="email"
                     value={formData.email}
                     onChange={onChange}
-                    placeholder="info@pure.ec"
+                    placeholder="usuario@dominio.com"
                     disabled={loading}
                   />
                 </div>
