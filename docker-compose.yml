@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  laravel:
+    build:
+      context: ./api-laravel-ilca
+      dockerfile: Dockerfile
+    container_name: api-laravel
+    restart: always
+    command: >
+      sh -c "
+      echo '=== DIAGNÓSTICO LARAVEL ===' &&
+      echo '1. Instalando dependencias...' &&
+      composer install --no-dev --optimize-autoloader &&
+      echo '2. Limpiando caché...' &&
+      php artisan config:clear &&
+      php artisan cache:clear &&
+      echo '3. Verificando configuración de base de datos...' &&
+      php artisan config:show database.connections.sqlsrv &&
+      echo '4. Probando conexión a SQL Server...' &&
+      php artisan tinker --execute='try { DB::connection()->getPdo(); echo \"Conexión exitosa\n\"; } catch (Exception \$$e) { echo \"Error: \" . \$$e->getMessage() . \"\n\"; }' &&
+      echo '5. Iniciando servidor Laravel...' &&
+      php artisan serve --host=0.0.0.0 --port=8000
+      "
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./api-laravel-ilca/.env
+    environment:
+      - APP_DEBUG=true
+      - LOG_LEVEL=debug
+    depends_on:
+      - redis
+    volumes:
+      - ./api-laravel-ilca:/var/www
+    networks:
+      - ilca-network
+
+  angular:
+    build:
+      context: ./ilca-2
+      dockerfile: Dockerfile
+    container_name: ilca-angular-app
+    restart: always
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./ilca-2:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - VITE_PORT=5173
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    tty: true
+    networks:
+      - ilca-network
+
+  redis:
+    image: redis:7
+    container_name: redis_cache
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - ilca-network
+
+networks:
+  ilca-network:
+    driver: bridge
