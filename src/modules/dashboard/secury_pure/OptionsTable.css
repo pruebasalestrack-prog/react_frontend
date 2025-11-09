@@ -1,0 +1,267 @@
+.table-container-modern {
+  max-width: 1400px;
+  margin: 0 auto 1rem;
+  padding: 0 2rem;
+}
+
+.table-scroll-wrapper {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  max-height: calc(100vh - 400px);
+  overflow-x: auto;
+  overflow-y: auto;
+  position: relative;
+}
+
+.table-modern {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 1200px;
+}
+
+/* STICKY HEADER - SE QUEDA FIJO AL HACER SCROLL */
+.thead-modern-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.thead-modern-sticky th {
+  padding: 1rem 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  color: white;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: none;
+  white-space: nowrap;
+}
+
+.th-actions {
+  width: 120px;
+  text-align: center !important;
+  padding-left: 1rem !important;
+}
+
+.th-id {
+  width: 70px;
+}
+
+.th-nombre {
+  min-width: 220px;
+}
+
+.th-url {
+  width: 140px;
+}
+
+.th-permission {
+  width: 50px;
+  text-align: center !important;
+}
+
+/* Filas de la tabla */
+.tr-modern {
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(241, 245, 249, 0.5);
+}
+
+.tr-modern:hover {
+  background: rgba(248, 250, 252, 0.6);
+  transform: translateX(4px);
+}
+
+.tr-modern:last-child {
+  border-bottom: none;
+}
+
+.table-modern td {
+  padding: 1rem 0.75rem;
+  color: #334155;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+/* Acciones */
+.td-actions-modern {
+  display: flex;
+  gap: 0.5rem;
+  padding-left: 1rem !important;
+}
+
+.btn-edit-modern,
+.btn-delete-modern {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-edit-modern {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.btn-edit-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.btn-delete-modern {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.btn-delete-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+/* ID */
+.td-id-modern {
+  font-weight: 700;
+  color: #667eea;
+  font-size: 0.95rem;
+}
+
+/* Nombre */
+.td-nombre-modern {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* URL */
+.td-url-modern {
+  padding: 0.75rem !important;
+}
+
+.url-tag {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  background: rgba(219, 234, 254, 0.9);
+  color: #1e40af;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  border: 1px solid rgba(147, 197, 253, 0.6);
+}
+
+/* Permisos centrados */
+.td-center-modern {
+  text-align: center;
+}
+
+.icon-yes {
+  color: #10b981;
+  filter: drop-shadow(0 2px 4px rgba(16, 185, 129, 0.3));
+}
+
+.icon-no {
+  color: #ef4444;
+  opacity: 0.5;
+}
+
+/* Sin datos */
+.no-data {
+  text-align: center;
+  padding: 4rem 2rem !important;
+}
+
+.no-data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: #94a3b8;
+}
+
+.no-data-container p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .table-container-modern {
+    padding: 0 1.5rem;
+  }
+
+  .table-scroll-wrapper {
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .table-container-modern {
+    padding: 0 1rem;
+  }
+
+  .table-scroll-wrapper {
+    max-height: calc(100vh - 450px);
+  }
+
+  .thead-modern-sticky th {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .table-modern td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .btn-edit-modern,
+  .btn-delete-modern {
+    width: 32px;
+    height: 32px;
+  }
+
+  .url-tag {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-scroll-wrapper {
+    border-radius: 8px;
+  }
+
+  .thead-modern-sticky th {
+    padding: 0.625rem 0.375rem;
+    font-size: 0.7rem;
+  }
+
+  .table-modern td {
+    padding: 0.625rem 0.375rem;
+    font-size: 0.8rem;
+  }
+
+  .btn-edit-modern,
+  .btn-delete-modern {
+    width: 28px;
+    height: 28px;
+  }
+
+  .icon-yes,
+  .icon-no {
+    width: 14px;
+    height: 14px;
+  }
+}

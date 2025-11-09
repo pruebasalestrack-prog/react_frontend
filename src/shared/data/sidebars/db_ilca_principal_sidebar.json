@@ -1,0 +1,118 @@
+{
+  "id": "db_ilca_principal",
+  "name": "ILCA Principal",
+  "menuGroups": [
+    {
+      "title": "PRINCIPAL",
+      "items": [
+        { 
+          "icon": "LayoutDashboard", 
+          "label": "Dashboard", 
+          "path": "/dashboard" 
+        },
+        { 
+          "icon": "BarChart3", 
+          "label": "Reportes", 
+          "path": "/dashboard/reports" 
+        }
+      ]
+    },
+    {
+      "title": "BASE DE DATOS",
+      "items": [
+        {
+          "icon": "Database",
+          "label": "Gestión de Datos",
+          "subItems": [
+            { 
+              "icon": "Table", 
+              "label": "Tablas", 
+              "path": "/dashboard/tables" 
+            },
+            { 
+              "icon": "FileText", 
+              "label": "Registros", 
+              "path": "/dashboard/records" 
+            },
+            { 
+              "icon": "PieChart", 
+              "label": "Consultas", 
+              "path": "/dashboard/queries" 
+            }
+          ]
+        },
+        {
+          "icon": "Users",
+          "label": "Usuarios",
+          "subItems": [
+            { 
+              "icon": "Users", 
+              "label": "Lista de Usuarios", 
+              "path": "/dashboard/users" 
+            },
+            { 
+              "icon": "UserCog", 
+              "label": "Roles y Permisos", 
+              "path": "/dashboard/roles" 
+            },
+            { 
+              "icon": "Shield", 
+              "label": "Seguridad", 
+              "path": "/dashboard/security" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "PROYECTOS",
+      "items": [
+        { 
+          "icon": "FolderKanban", 
+          "label": "Mis Proyectos", 
+          "path": "/dashboard/projects" 
+        },
+        { 
+          "icon": "TrendingUp", 
+          "label": "Estadísticas", 
+          "path": "/dashboard/project-stats" 
+        },
+        { 
+          "icon": "Package", 
+          "label": "Recursos", 
+          "path": "/dashboard/resources" 
+        }
+      ]
+    },
+    {
+      "title": "COMUNICACIÓN",
+      "items": [
+        { 
+          "icon": "Bell", 
+          "label": "Notificaciones", 
+          "path": "/dashboard/notifications" 
+        },
+        { 
+          "icon": "Mail", 
+          "label": "Mensajes", 
+          "path": "/dashboard/messages" 
+        },
+        { 
+          "icon": "Calendar", 
+          "label": "Calendario", 
+          "path": "/dashboard/calendar" 
+        }
+      ]
+    },
+    {
+      "title": "CONFIGURACIÓN",
+      "items": [
+        { 
+          "icon": "Settings", 
+          "label": "Ajustes", 
+          "path": "/dashboard/settings" 
+        }
+      ]
+    }
+  ]
+}
